@@ -25,8 +25,8 @@ class MainApp extends StatelessWidget {
               gravity: ToastGravity.CENTER
             ) ,
             child: Text("Ver mensagem"),
-        ) , 
+        ), 
       ), 
-    ); 
+    );
   }
 }
