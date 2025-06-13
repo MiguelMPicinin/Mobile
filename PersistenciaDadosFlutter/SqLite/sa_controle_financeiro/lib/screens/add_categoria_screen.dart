@@ -18,7 +18,6 @@ class _AddCategoriaScreenState extends State<AddCategoriaScreen> {
   void _salvar() async {
     if (_formKey.currentState!.validate()) {
       final categoria = Categoria(
-        // Modificado: conversão para double
         alimentacao: double.tryParse(_alimentacaoController.text) ?? 0,
         transporte: double.tryParse(_transporteController.text) ?? 0,
         lazer: double.tryParse(_lazerController.text) ?? 0,

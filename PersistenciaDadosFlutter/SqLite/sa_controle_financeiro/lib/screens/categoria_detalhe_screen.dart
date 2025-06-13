@@ -29,7 +29,6 @@ class _CategoriaDetalheScreenState extends State<CategoriaDetalheScreen> {
     final transacoes = await _transacaoController.getTransacoesPorCategoria(widget.categoria.id!);
     setState(() {
       _transacoes = transacoes;
-      // Modificado: cálculo dos gastos por categoria
       _gastoAlimentacao = _transacoes
           .where((t) => t.descricao.toLowerCase().contains('alimentação') && t.tipo == 'despesa')
           .fold(0.0, (s, t) => s + t.valor);
@@ -64,7 +63,6 @@ class _CategoriaDetalheScreenState extends State<CategoriaDetalheScreen> {
             subtitle: Text(
                 'Alimentação: ${widget.categoria.alimentacao} | Transporte: ${widget.categoria.transporte} | Lazer: ${widget.categoria.lazer} | Salário: ${widget.categoria.salario}'),
           ),
-          // Modificado: avisos em vermelho se ultrapassar limite
           if (_gastoAlimentacao > widget.categoria.alimentacao)
             Padding(
               padding: const EdgeInsets.all(8.0),

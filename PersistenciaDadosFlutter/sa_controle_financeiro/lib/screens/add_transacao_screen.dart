@@ -4,7 +4,9 @@ import '../models/transacao_model.dart';
 
 class AddTransacaoScreen extends StatefulWidget {
   final int categoriaId;
-  AddTransacaoScreen({required this.categoriaId});
+  final Transacao? transacao;
+
+  AddTransacaoScreen({required this.categoriaId, this.transacao});
 
   @override
   State<AddTransacaoScreen> createState() => _AddTransacaoScreenState();
@@ -18,16 +20,41 @@ class _AddTransacaoScreenState extends State<AddTransacaoScreen> {
   String _tipo = 'despesa';
   final TransacaoController _controller = TransacaoController();
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.transacao != null) {
+      _valorController.text = widget.transacao!.valor.toString();
+      _descricaoController.text = widget.transacao!.descricao;
+      _data = widget.transacao!.data;
+      _tipo = widget.transacao!.tipo;
+    }
+  }
+
   void _salvar() async {
     if (_formKey.currentState!.validate()) {
-      final transacao = Transacao(
-        categoriaId: widget.categoriaId,
-        valor: double.tryParse(_valorController.text) ?? 0,
-        descricao: _descricaoController.text,
-        data: _data,
-        tipo: _tipo,
-      );
-      await _controller.addTransacao(transacao);
+      if (widget.transacao == null) {
+        // Nova transação
+        final transacao = Transacao(
+          categoriaId: widget.categoriaId,
+          valor: double.tryParse(_valorController.text) ?? 0,
+          descricao: _descricaoController.text,
+          data: _data,
+          tipo: _tipo,
+        );
+        await _controller.addTransacao(transacao);
+      } else {
+        // Editar transação
+        final transacao = Transacao(
+          id: widget.transacao!.id,
+          categoriaId: widget.categoriaId,
+          valor: double.tryParse(_valorController.text) ?? 0,
+          descricao: _descricaoController.text,
+          data: _data,
+          tipo: _tipo,
+        );
+        await _controller.updateTransacao(transacao);
+      }
       Navigator.pop(context);
     }
   }
@@ -35,7 +62,7 @@ class _AddTransacaoScreenState extends State<AddTransacaoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Nova Transação')),
+      appBar: AppBar(title: Text(widget.transacao == null ? 'Nova Transação' : 'Editar Transação')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -84,7 +111,7 @@ class _AddTransacaoScreenState extends State<AddTransacaoScreen> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _salvar,
-                child: Text('Salvar'),
+                child: Text(widget.transacao == null ? 'Salvar' : 'Atualizar'),
               ),
             ],
           ),
