@@ -1,8 +1,9 @@
 // Exemplo de Teste de Conversão Json
 
-import 'dart:convert';
+import 'dart:convert'; //biblioteca para o funcionamento
 
 void main() {
+  //texto em formado JSON
   String DbJson = '''{
       "id": 1,
       "nome": "João",
@@ -11,6 +12,7 @@ void main() {
       "senha": 1234
                   } ''';
 
+  //Convertendo texto JSON -> map(dart)
   Map<String, dynamic> usuario = json.decode(DbJson);
 
   print(usuario["login"]);
@@ -19,7 +21,7 @@ void main() {
 
   usuario["senha"] = 1111;
 
-  //fazer o encode
+  //fazer o encode -> map(dart) -> texto JSON
 
   DbJson = json.encode(usuario);
 

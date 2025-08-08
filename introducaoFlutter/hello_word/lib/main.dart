@@ -18,15 +18,17 @@ class MainApp extends StatelessWidget {
         //modelo de página
         appBar: AppBar(title: Text("App hello word")),
         body: Center(
-        child: ElevatedButton(
-            onPressed: () => Fluttertoast.showToast(
-              msg: "Hello Word!!!",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER
-            ) ,
+          child: ElevatedButton(
+            onPressed:
+                () => Fluttertoast.showToast(
+                  msg: "Hello Word!!!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                ),
             child: Text("Ver mensagem"),
-        ), 
-      ), 
+          ),
+        ),
+      ),
     );
   }
 }
