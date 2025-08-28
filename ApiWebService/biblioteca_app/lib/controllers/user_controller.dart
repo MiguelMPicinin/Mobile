@@ -3,11 +3,14 @@ import 'package:biblioteca_app/models/user_models.dart';
 import 'package:biblioteca_app/services/api_services.dart';
 
 class UserController {
+  //obs: não precisa instaciar obj de ApiService (métodos static)
+
+
   //Métodos
   //GET Todos os usuarios
   Future<List<UserModels>> fetchAll() async {
-    final list = await ApiService.getList("users?_sort=name");
-    //Retorna lista completa de usuariso convertidos em UserModels
+    final list = await ApiService.getList("users?_sort=name"); //?_sort=name -> flag para organizar em ordem alfabetica
+    //Retorna lista completa de usuariso convertidos em UserModels para User Model List<dynamic> => list<OBJ>
     return list.map<UserModels>((item) => UserModels.fromJson(item)).toList();
   }
 

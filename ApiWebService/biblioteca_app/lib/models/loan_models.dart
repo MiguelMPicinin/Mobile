@@ -1,17 +1,22 @@
+import 'package:flutter/widgets.dart';
+
 class LoanModels {
-  final String id;
+  final String? id;
   final String userId;
   final String bookId;
   final dynamic startDate;
-  bool returned;
+  bool? returned;
 
   LoanModels({
-    required this.id,
+    this.id,
     required this.userId,
     required this.bookId,
     required this.startDate,
-    required this.returned,
+    this.returned,
   });
+
+    Map<String, dynamic> toJson() => {"id": id, "userId": userId, "bookId": bookId, "startDate": startDate, "returned": returned};
+
 
   factory LoanModels.fromJson(Map<String, dynamic> json) => LoanModels(
     id: json["id"].toString(),

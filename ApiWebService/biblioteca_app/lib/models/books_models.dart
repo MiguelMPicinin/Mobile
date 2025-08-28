@@ -1,12 +1,12 @@
 //Classe representando o json books
 class BooksModels {
-  final String id;
+  final String? id;
   final String title;
   final String author;
   bool avaliable;
 
   BooksModels({
-    required this.id,
+    this.id,
     required this.title,
     required this.author,
     required this.avaliable,
@@ -22,10 +22,10 @@ class BooksModels {
   };
 
   //fromJson
-  factory BooksModels.formJson(Map<String, dynamic> json) => BooksModels(
-    id: json["id"].toString(),
-    title: json["title"].toString(),
-    author: json["author"].toString(),
-    avaliable: json["avaliable"]
+  factory BooksModels.fromJson(Map<String, dynamic> map) => BooksModels(
+    id: map["id"].toString(),
+    title: map["title"].toString(),
+    author: map["author"].toString(),
+    avaliable: map["avaliable"] == true ? true : false
   );
 }

@@ -6,10 +6,10 @@ class UserModels {
   UserModels({this.id, required this.name, required this.email});
 
   //Métodos
-  //toJson
+  //toJson OBJ => MAP
   Map<String, dynamic> toJson() => {"id": id, "name": name, "email": email};
 
-  //fromJson
+  //fromJson MAP => OBJ
   factory UserModels.fromJson(Map<String, dynamic> json) => UserModels(
     id: json["id"].toString(),
     name: json["name"].toString(),
