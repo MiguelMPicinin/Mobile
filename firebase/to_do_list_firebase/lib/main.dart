@@ -1,20 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_list_firebase/firebase_options.dart';
 
-void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();// garantir a inincialização dos bindigs
+  //inicializa o firebase -  ao mesmo tempo que abre as telas
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MaterialApp(
+    title: "Lista de Tarefas",
+    home: AuntenticacaoView(), //direciona para a tela de aurenticação
+  ));
 }
