@@ -86,10 +86,6 @@ class _BookListViewState extends State<BookListView> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  onPressed: () => _openForm(book: book),
-                                  icon: Icon(Icons.edit),
-                                ),
-                                IconButton(
                                   onPressed: () => _delete(book),
                                   icon: Icon(Icons.delete, color: Colors.red),
                                 ),
