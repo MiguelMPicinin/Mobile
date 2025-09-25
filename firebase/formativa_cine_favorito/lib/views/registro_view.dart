@@ -67,7 +67,7 @@ class _RegistroViewState extends State<RegistroView> {
             TextField(
               controller: _confSenhaField,
               decoration: InputDecoration(
-                labelText: "Senha",
+                labelText: "Confirmar Senha",
                 suffix: IconButton(
                   onPressed: () => setState(() {
                     _confSenhaOculta =

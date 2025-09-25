@@ -1,10 +1,10 @@
-name: formativa_cine_favorito
+name: formativa_cine_favorite
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.8.1
 
 dependencies:
   flutter:
@@ -13,7 +13,8 @@ dependencies:
   firebase_auth: ^6.0.2
   cloud_firestore: ^6.0.1
   http: ^1.5.0
-  path_provider: ^2.0.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

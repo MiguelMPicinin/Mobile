@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:formativa_cine_favorito/views/registro_view.dart';
+import 'package:formativa_cine_favorite/views/registro_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

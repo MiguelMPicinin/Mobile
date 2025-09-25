@@ -113,3 +113,14 @@ graph TD
     F --> B
 
 ```
+
+## Prototipagem
+Link dos Protótipos: 
+
+
+## Codificação
+
+- Service --> Conectar com a API
+- Model --> Favorite Movie
+- Controller -> FireStore DataBase - Incompleto
+- View -> Registro, Login, FavoriteView, SearchView
