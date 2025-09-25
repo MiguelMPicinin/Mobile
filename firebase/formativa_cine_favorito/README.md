@@ -92,4 +92,24 @@ graph TD
     ac2 --> ac5 
     ac2 --> ac6 
     ac2 --> ac7 
+
+```
+
+
+3. ### Fluxo
+Determina o caminho percorrido pelo autor para Executar uma Ação
+
+- Fluxo da Ação de Login
+
+```mermaid
+
+graph TD
+    A[Início] --> B{Login Usuario}
+    B --> C[Inserir Email e Senha]
+    C --> D{Validar as Credenciais}
+    D --> E[SIM]
+    D --> F[NÃO]
+    E --> G[HomePage]
+    F --> B
+
 ```
