@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "555333736155",
+    "project_id": "fa-mapa-ponto",
+    "storage_bucket": "fa-mapa-ponto.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555333736155:android:21b37fe66f664bd2b15efe",
+        "android_client_info": {
+          "package_name": "com.example.form_mobile_avaliativa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd5bvfrtTCrug3Ztt2vZSJf3mTmJwyVYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
