@@ -1,3 +1,4 @@
+// models/location_point.dart
 class LocationPoint {
   final double latitude;
   final double longitude;
@@ -16,8 +17,8 @@ class LocationPoint {
 
   factory LocationPoint.fromMap(Map<String, dynamic> map) {
     return LocationPoint(
-      latitude: map['latitude'],
-      longitude: map['longitude'],
+      latitude: (map['latitude'] as num).toDouble(),
+      longitude: (map['longitude'] as num).toDouble(),
     );
   }
 }
