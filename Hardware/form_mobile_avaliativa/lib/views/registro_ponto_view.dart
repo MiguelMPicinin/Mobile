@@ -23,11 +23,42 @@ class _RegisterPointViewState extends State<RegisterPointView> {
   bool _canRegister = false;
   double _distance = 0;
   String? _error;
+  bool _isNextEntry = true; // Controla se o próximo ponto é entrada ou saída
 
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
+    _checkNextPointType();
+  }
+
+  Future<void> _checkNextPointType() async {
+    final user = _firebaseController.currentUser;
+    if (user == null) return;
+
+    try {
+      // Buscar o último ponto do usuário para determinar o próximo tipo
+      final pointsStream = _pointController.getWorkPoints(user.uid);
+      final pointsList = await pointsStream.first;
+      
+      if (pointsList.isEmpty) {
+        // Se não há pontos, o próximo é entrada
+        setState(() {
+          _isNextEntry = true;
+        });
+      } else {
+        // Verificar o último ponto registrado
+        final lastPoint = pointsList.first;
+        setState(() {
+          _isNextEntry = !lastPoint.isWorking; // Alterna entre entrada e saída
+        });
+      }
+    } catch (e) {
+      // Em caso de erro, assume que o próximo é entrada
+      setState(() {
+        _isNextEntry = true;
+      });
+    }
   }
 
   Future<void> _getCurrentLocation() async {
@@ -122,14 +153,14 @@ class _RegisterPointViewState extends State<RegisterPointView> {
         timestamp: DateTime.now(),
         latitude: _currentLocation!.latitude,
         longitude: _currentLocation!.longitude,
-        isWorking: true,
+        isWorking: _isNextEntry, // Usa a variável que controla entrada/saída
       );
       
       await _pointController.saveWorkPoint(point);
       
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Ponto registrado com sucesso!'),
+        SnackBar(
+          content: Text('${_isNextEntry ? 'Entrada' : 'Saída'} registrada com sucesso!'),
           backgroundColor: Colors.green,
         ),
       );
@@ -229,7 +260,36 @@ class _RegisterPointViewState extends State<RegisterPointView> {
                         ),
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
+
+                      // Indicador do tipo de ponto
+                      Card(
+                        color: _isNextEntry ? Colors.blue[50] : Colors.orange[50],
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                _isNextEntry ? Icons.login : Icons.logout,
+                                color: _isNextEntry ? Colors.blue : Colors.orange,
+                                size: 24,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                _isNextEntry ? 'Próximo: ENTRADA' : 'Próximo: SAÍDA',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: _isNextEntry ? Colors.blue : Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 16),
 
                       // Informações de localização
                       const Text(
@@ -275,14 +335,14 @@ class _RegisterPointViewState extends State<RegisterPointView> {
                           child: ElevatedButton.icon(
                             onPressed: _registerPointWithPassword,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: _isNextEntry ? Colors.blue : Colors.orange,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                             ),
-                            icon: const Icon(Icons.lock),
-                            label: const Text(
-                              'Registrar com Senha',
-                              style: TextStyle(fontSize: 16),
+                            icon: Icon(_isNextEntry ? Icons.login : Icons.logout),
+                            label: Text(
+                              _isNextEntry ? 'Registrar Entrada' : 'Registrar Saída',
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ),
@@ -294,14 +354,14 @@ class _RegisterPointViewState extends State<RegisterPointView> {
                           child: ElevatedButton.icon(
                             onPressed: _registerPointWithBiometrics,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
+                              backgroundColor: _isNextEntry ? Colors.green : Colors.red,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                             ),
                             icon: const Icon(Icons.fingerprint),
-                            label: const Text(
-                              'Registrar com Biometria',
-                              style: TextStyle(fontSize: 16),
+                            label: Text(
+                              _isNextEntry ? 'Entrada com Biometria' : 'Saída com Biometria',
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ),

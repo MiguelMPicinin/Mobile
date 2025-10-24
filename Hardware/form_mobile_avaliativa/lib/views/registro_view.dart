@@ -88,4 +88,4 @@ class _RegistroViewState extends State<RegistroView> {
       ),
     );
   }
-}
+}   

@@ -6,8 +6,6 @@ import 'package:form_mobile_avaliativa/models/location_point.dart';
 import 'package:form_mobile_avaliativa/views/historico_view.dart';
 import 'package:form_mobile_avaliativa/views/map_set_work_view.dart';
 import 'package:form_mobile_avaliativa/views/registro_ponto_view.dart';
-import 'package:form_mobile_avaliativa/views/historico_view.dart';
-import 'package:form_mobile_avaliativa/views/registro_ponto_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

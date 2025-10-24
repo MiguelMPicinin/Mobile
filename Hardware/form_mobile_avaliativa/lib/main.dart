@@ -1,15 +1,11 @@
 // main.dart (atualizado)
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:form_mobile_avaliativa/models/location_point.dart';
 import 'package:form_mobile_avaliativa/views/historico_view.dart';
-import 'package:form_mobile_avaliativa/views/registro_ponto_view.dart';
 import 'views/login_view.dart';
 import 'views/registro_view.dart';
 import 'views/home_view.dart';
 import 'views/map_set_work_view.dart';
-import 'views/registro_ponto_view.dart';
-import 'views/historico_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Sistema de Ponto',
       theme: ThemeData(
         primarySwatch: Colors.blue,

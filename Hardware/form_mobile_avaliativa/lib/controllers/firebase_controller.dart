@@ -18,6 +18,7 @@ class FirebaseController {
     }
   }
 
+
   Future<User?> registerWithEmailAndPassword(String email, String password) async {
     try {
       final userCredential = await _auth.createUserWithEmailAndPassword(
